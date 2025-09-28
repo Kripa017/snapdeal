@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+< lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kripa Portfolio</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            scroll-behavior: smooth;
+        }
+        section {
+            padding: 80px 0;
+        }
+        .hero {
+            background: #0d6efd;
+            color: white;
+            text-align: center;
+            padding: 150px 20px;
+        }
+        .hero h1 {
+            font-size: 3rem;
+        }
+        .hero p.tagline {
+            font-size: 1.5rem;
+            margin-top: 15px;
+        }
+        .skill-card {
+            transition: transform 0.3s;
+        }
+        .skill-card:hover {
+            transform: scale(1.05);
+        }
+        .award-card {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+    
+</body>
+
+                    
+
+    
+
+
+
+
+
+
+
+
+    
+
+
+
+
+<!-- Hero Section -->
+<section class="hero" id="hero">
+    <div class="container">
+<!--circular profile image-->
+        <img src="https://via.placeholder.com/150" class="rounded-circle mb-4" alt="Smiling person facing forward with a neutral background, conveying a friendly and approachable mood">
+
+
+    
+       
+        <h1>I am Kripa, 3rd Sem MCA student from VCET, Puttur</h1>
+        <p class="tagline">Passionate about programming and building innovative solutions with technology</p>
+        <a href="#contact" class="btn btn-light btn-lg mt-4">Contact Me</a>
+    </div>
+</section>
+
+<!-- About Me Section -->
+<section id="about">
+    <div class="container">
+        <h2 class="text-center mb-5">About Me</h2>
+        <div class="row">
+            <div class="col-md-12">
+                <p>I am Kripa, a 3rd semester MCA student with a strong foundation in programming and software development. I have hands-on experience in building applications using Python and modern frameworks, focusing on creating efficient and scalable solutions.</p>
+                <p>My interest lies in exploring emerging technologies such as Artificial Intelligence, Machine Learning, and IoT. I enjoy implementing complex algorithms and data structures to solve real-world problems, which enhances my analytical and problem-solving skills.</p>
+                <p>In addition to my technical skills, I am passionate about cybersecurity and ensuring secure software practices. I constantly participate in hackathons and online coding communities to improve my knowledge and stay updated with industry trends.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- My Skills Section -->
+<section id="skills" class="bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">My Skills</h2>
+        <div class="row text-center">
+            <div class="col-md-3">
+                <div class="card skill-card p-3">
+                    <h5>Python</h5>
+                    <p>Proficient in Python for application development, data analysis, and scripting.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card skill-card p-3">
+                    <h5>AI and ML</h5>
+                    <p>Implement AI and ML algorithms to create predictive and intelligent systems.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card skill-card p-3">
+                    <h5>IoT</h5>
+                    <p>Develop IoT solutions integrating hardware sensors and cloud platforms.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card skill-card p-3">
+                    <h5>Cyber Security</h5>
+                    <p>Ensuring secure coding practices and protecting systems from cyber threats.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Awards and Recognition Section -->
+<section id="awards">
+    <div class="container">
+        <h2 class="text-center mb-5">Awards and Recognition</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card award-card p-3">
+                    <h5>Hackathon Winner 2025</h5>
+                    <p>Won the Hackathon 2025 for developing an innovative project that combined AI and IoT, showcasing problem-solving and technical excellence.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card award-card p-3">
+                    <h5>1K Badges on StackOverflow</h5>
+                    <p>Earned over 1000 badges on StackOverflow by actively contributing to programming communities and sharing technical knowledge.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card award-card p-3">
+                    <h5>500 Stars on GitHub</h5>
+                    <p>Received 500 stars on GitHub repositories for open-source contributions, showcasing projects and collaborative software development skills.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Me Section -->
+<section id="contact" class="bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">Contact Me</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <h5>Address & Email</h5>
+                <p>VCET, Puttur, Karnataka, India</p>
+                <p>Email: kripa@example.com</p>
+            </div>
+            <div class="col-md-6">
+                <h5>Contact Form</h5>
+                <form>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" placeholder="Your Name" >
+                    </div>
+                    <div class="mb-3">
+                        <input type="email" class="form-control" placeholder="Your Email" >
+                    </div>
+                    <div class="mb-3">
+                        <textarea class="form-control" rows="4" placeholder="Your Message" ></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!--validation of Form with Javascript,Display Error Message Below Texbox-->
+<script>
+    document.querySelector('form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        let name = this.querySelector('input[type="text"]').value;
+        let email = this.querySelector('input[type="email"]').value;
+        let message = this.querySelector('textarea').value;
+        if(name === '' || email === '' || message === '') {
+            alert('Please fill in all fields.');
+        } else {
+            alert('Message sent successfully!');
+            this.reset();
+        }
+    });
+</script>
+</body>
+</html>
