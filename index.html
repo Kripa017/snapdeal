@@ -1,197 +1,295 @@
 <!DOCTYPE html>
-<lang="en">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kripa Portfolio</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            scroll-behavior: smooth;
-        }
-        section {
-            padding: 80px 0;
-        }
-        .hero {
-            background: #0d6efd;
-            color: white;
-            text-align: center;
-            padding: 150px 20px;
-        }
-        .hero h1 {
-            font-size: 3rem;
-        }
-        .hero p.tagline {
-            font-size: 1.5rem;
-            margin-top: 15px;
-        }
-        .skill-card {
-            transition: transform 0.3s;
-        }
-        .skill-card:hover {
-            transform: scale(1.05);
-        }
-        .award-card {
-            margin-bottom: 20px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kripa A | Portfolio</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body {
+    scroll-behavior: smooth;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+section {
+    padding: 80px 0;
+}
+
+.navbar {
+    background: #0d6efd;
+}
+
+.navbar a {
+    color: white !important;
+}
+
+.hero {
+    background: linear-gradient(135deg, #0d6efd, #001f4d);
+    color: white;
+    text-align: center;
+    padding: 140px 20px;
+}
+
+.hero img {
+    border: 5px solid white;
+}
+
+.card:hover {
+    transform: scale(1.03);
+    transition: 0.3s;
+}
+
+.project-card {
+    height: 100%;
+}
+
+.footer {
+    background: #001f4d;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+</style>
 </head>
 
-    
-</body>
+<body>
 
-                    
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg fixed-top">
+<div class="container">
+<a class="navbar-brand text-white" href="#">Kripa A</a>
+<button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navMenu">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navMenu">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+<li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+<li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+<li class="nav-item"><a class="nav-link" href="#achievements">Achievements</a></li>
+<li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+</ul>
+</div>
+</div>
+</nav>
 
-    
-
-
-
-
-
-
-
-
-    
-
-
-
-
-<!-- Hero Section -->
+<!-- Hero -->
 <section class="hero" id="hero">
-    <div class="container">
-<!--circular profile image-->
-        
-        <img src="kripaphoto.jpg" alt="Kripa" class="rounded-circle mb-4" width="150" height="150">
-
-
-    
-       
-        <h1>I am Kripa, 3rd Sem MCA student from VCET, Puttur</h1>
-        <p class="tagline">Passionate about programming and building innovative solutions with technology</p>
-        <a href="#contact" class="btn btn-light btn-lg mt-4">Contact Me</a>
-    </div>
+<div class="container">
+<img src="kripaphoto.jpg" class="rounded-circle mb-4" width="160" height="160">
+<h1>I am Kripa A</h1>
+<p class="lead">MCA Student | Flutter & Full Stack Developer</p>
+<p class="tagline">Passionate about building innovative and user-friendly software solutions</p>
+<a href="#contact" class="btn btn-light btn-lg mt-3">Contact Me</a>
+</div>
 </section>
 
-<!-- About Me Section -->
+<!-- About -->
 <section id="about">
-    <div class="container">
-        <h2 class="text-center mb-5">About Me</h2>
-        <div class="row">
-            <div class="col-md-12">
-                <p>I am Kripa, a 3rd semester MCA student with a strong foundation in programming and software development. I have hands-on experience in building applications using Python and modern frameworks, focusing on creating efficient and scalable solutions.</p>
-                <p>My interest lies in exploring emerging technologies such as Artificial Intelligence, Machine Learning, and IoT. I enjoy implementing complex algorithms and data structures to solve real-world problems, which enhances my analytical and problem-solving skills.</p>
-                <p>In addition to my technical skills, I am passionate about cybersecurity and ensuring secure software practices. I constantly participate in hackathons and online coding communities to improve my knowledge and stay updated with industry trends.</p>
-            </div>
-        </div>
-    </div>
+<div class="container">
+<h2 class="text-center mb-5">About Me</h2>
+<p>
+I am a 4th semester MCA student from Vivekananda College of Engineering and Technology, Puttur.
+I have a strong foundation in programming and software development with hands-on experience
+in full-stack applications and Flutter mobile apps.
+</p>
+
+<p>
+My interests include Artificial Intelligence, Full Stack Development, and IoT systems.
+I enjoy solving real-world problems using algorithms and modern technologies,
+which strengthens my analytical and problem-solving skills.
+</p>
+
+<p>
+I actively participate in hackathons and coding communities to improve my skills,
+stay updated with industry trends, and gain practical development experience.
+</p>
+</div>
 </section>
 
-<!-- My Skills Section -->
+<!-- Skills -->
 <section id="skills" class="bg-light">
-    <div class="container">
-        <h2 class="text-center mb-5">My Skills</h2>
-        <div class="row text-center">
-            <div class="col-md-3">
-                <div class="card skill-card p-3">
-                    <h5>Python</h5>
-                    <p>Proficient in Python for application development, data analysis, and scripting.</p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card skill-card p-3">
-                    <h5>AI and ML</h5>
-                    <p>Implement AI and ML algorithms to create predictive and intelligent systems.</p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card skill-card p-3">
-                    <h5>IoT</h5>
-                    <p>Develop IoT solutions integrating hardware sensors and cloud platforms.</p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card skill-card p-3">
-                    <h5>Cyber Security</h5>
-                    <p>Ensuring secure coding practices and protecting systems from cyber threats.</p>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="container">
+<h2 class="text-center mb-5">Skills</h2>
+<div class="row text-center">
+
+<div class="col-md-3 mb-3">
+<div class="card p-3">
+<h5>Python</h5>
+<p>Application development, scripting, and automation.</p>
+</div>
+</div>
+
+<div class="col-md-3 mb-3">
+<div class="card p-3">
+<h5>Flutter</h5>
+<p>Building responsive and user-friendly mobile apps.</p>
+</div>
+</div>
+
+<div class="col-md-3 mb-3">
+<div class="card p-3">
+<h5>AI & ML</h5>
+<p>Predictive models and intelligent systems.</p>
+</div>
+</div>
+
+<div class="col-md-3 mb-3">
+<div class="card p-3">
+<h5>IoT</h5>
+<p>Hardware integration and sensor-based systems.</p>
+</div>
+</div>
+
+</div>
+</div>
 </section>
 
-<!-- Awards and Recognition Section -->
-<section id="awards">
-    <div class="container">
-        <h2 class="text-center mb-5">Awards and Recognition</h2>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card award-card p-3">
-                    <h5>Hackathon Winner 2025</h5>
-                    <p>Won the Hackathon 2025 for developing an innovative project that combined AI and IoT, showcasing problem-solving and technical excellence.</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card award-card p-3">
-                    <h5>1K Badges on StackOverflow</h5>
-                    <p>Earned over 1000 badges on StackOverflow by actively contributing to programming communities and sharing technical knowledge.</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card award-card p-3">
-                    <h5>500 Stars on GitHub</h5>
-                    <p>Received 500 stars on GitHub repositories for open-source contributions, showcasing projects and collaborative software development skills.</p>
-                </div>
-            </div>
-        </div>
-    </div>
+<!-- Projects -->
+<section id="projects">
+<div class="container">
+<h2 class="text-center mb-5">Projects</h2>
+<div class="row g-4">
+
+<div class="col-md-6">
+<div class="card project-card p-3">
+<h5>FarmEasy</h5>
+<p>
+Full-stack agricultural platform with weather forecasting,
+crop delivery and ordering system using PHP, MySQL,
+HTML, CSS, Bootstrap and JavaScript.
+</p>
+</div>
+</div>
+
+<div class="col-md-6">
+<div class="card project-card p-3">
+<h5>ClothCycle</h5>
+<p>
+Clothing exchange platform enabling sustainable fashion
+through seamless user-to-user swaps.
+</p>
+</div>
+</div>
+
+<div class="col-md-6">
+<div class="card project-card p-3">
+<h5>Online Billing System</h5>
+<p>
+Java-based billing automation system with invoice
+generation and printing support.
+</p>
+</div>
+</div>
+
+<div class="col-md-6">
+<div class="card project-card p-3">
+<h5>Flutter Notes App</h5>
+<p>
+Mobile app with add, edit and delete features focusing
+on clean and user-friendly interface.
+</p>
+</div>
+</div>
+
+<div class="col-md-6">
+<div class="card project-card p-3">
+<h5>Ayurvedic Plants Website</h5>
+<p>
+Frontend website developed using HTML, CSS, JavaScript.
+</p>
+</div>
+</div>
+
+<div class="col-md-6">
+<div class="card project-card p-3">
+<h5>IoT Crash Sense System</h5>
+<p>
+Arduino-based crash detection system with Bluetooth
+wireless communication.
+</p>
+</div>
+</div>
+
+</div>
+</div>
 </section>
 
-<!-- Contact Me Section -->
-<section id="contact" class="bg-light">
-    <div class="container">
-        <h2 class="text-center mb-5">Contact Me</h2>
-        <div class="row">
-            <div class="col-md-6">
-                <h5>Address & Email</h5>
-                <p>VCET, Puttur, Karnataka, India</p>
-                <p>Email: kripa@example.com</p>
-            </div>
-            <div class="col-md-6">
-                <h5>Contact Form</h5>
-                <form>
-                    <div class="mb-3">
-                        <input type="text" class="form-control" placeholder="Your Name" >
-                    </div>
-                    <div class="mb-3">
-                        <input type="email" class="form-control" placeholder="Your Email" >
-                    </div>
-                    <div class="mb-3">
-                        <textarea class="form-control" rows="4" placeholder="Your Message" ></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Send Message</button>
-                </form>
-            </div>
-        </div>
-    </div>
+<!-- Achievements -->
+<section id="achievements" class="bg-light">
+<div class="container">
+<h2 class="text-center mb-5">Certificates & Achievements</h2>
+<ul class="list-group">
+
+<li class="list-group-item">
+Presented “FarmEasy” at DRISHTI–2025 International Conference
+</li>
+
+<li class="list-group-item">
+Participated in CODE-A-THON Hackathon – VCET (July 2025)
+</li>
+
+<li class="list-group-item">
+ISRO Certified: Geodata Processing using Python & ML
+</li>
+
+<li class="list-group-item">
+Elite Gold Certificate – Research Methodologies & IPR (VTU)
+</li>
+
+<li class="list-group-item">
+Research Paper: IoT Power Line Fault Detection (Dec 2025)
+</li>
+
+<li class="list-group-item">
+Runner-Up – Project Expo Competition (IoT Fault Detection)
+</li>
+
+</ul>
+</div>
 </section>
 
-<!-- Bootstrap JS -->
+<!-- Contact -->
+<section id="contact">
+<div class="container">
+<h2 class="text-center mb-5">Contact</h2>
+
+<div class="row">
+<div class="col-md-6">
+<h5>Address</h5>
+<p>VCET, Puttur, Karnataka, India</p>
+<p>Email: kripa@example.com</p>
+</div>
+
+<div class="col-md-6">
+<h5>Send Message</h5>
+<form id="contactForm">
+<input class="form-control mb-2" placeholder="Name">
+<input class="form-control mb-2" placeholder="Email">
+<textarea class="form-control mb-2" rows="4" placeholder="Message"></textarea>
+<button class="btn btn-primary">Submit</button>
+</form>
+</div>
+</div>
+
+</div>
+</section>
+
+<div class="footer">
+© 2026 Kripa A | Portfolio
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<!--validation of Form with Javascript,Display Error Message Below Texbox-->
+
 <script>
-    document.querySelector('form').addEventListener('submit', function(event) {
-        event.preventDefault();
-        let name = this.querySelector('input[type="text"]').value;
-        let email = this.querySelector('input[type="email"]').value;
-        let message = this.querySelector('textarea').value;
-        if(name === '' || email === '' || message === '') {
-            alert('Please fill in all fields.');
-        } else {
-            alert('Message sent successfully!');
-            this.reset();
-        }
-    });
+document.getElementById("contactForm").addEventListener("submit", function(e){
+e.preventDefault();
+alert("Message sent successfully!");
+this.reset();
+});
 </script>
+
 </body>
 </html>
