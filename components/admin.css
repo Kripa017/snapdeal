@@ -1,0 +1,92 @@
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #ebedef;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: white;
+    width: 420px;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #f366b6;
+    border-radius: 4px;
+}
+
+.phone-input-wrapper {
+    display: flex;
+    align-items: stretch;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.phone-input-wrapper .phone-prefix {
+    display: flex;
+    align-items: center;
+    padding: 10px 12px;
+    background-color: #f5f5f5;
+    color: #f169a2;
+    font-weight: 500;
+    border-right: 1px solid #ccc;
+}
+
+.phone-input-wrapper input {
+    flex: 1;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+}
+
+.primary-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #f569b3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.primary-btn:hover {
+    background-color: #f569b3;
+}
+
+.error-msg {
+    color: #c0392b;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.secondary-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+}

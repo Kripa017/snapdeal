@@ -1,0 +1,84 @@
+body {
+    font-family: Arial;
+    background: #f4f4f4;
+    margin: 0;
+    overflow: hidden;
+}
+
+/* Container */
+.container {
+    width: 40%;
+    margin: 10px auto;
+}
+
+/* Title */
+h2 {
+    text-align: center;
+    color: #4caf50;
+    margin: 5px 0;
+}
+
+/* Box */
+.box {
+    background: #fff;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Section titles */
+h3 {
+    margin: 8px 0 4px;
+    font-size: 14px;
+}
+
+/* Inputs */
+input {
+    width: 100%;
+    padding: 6px;
+    margin: 3px 0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 12px;
+}
+
+/* Row */
+.row {
+    display: flex;
+    gap: 5px;
+}
+
+.row input {
+    width: 50%;
+}
+
+/* Payment options */
+.pay label {
+    display: block;
+    font-size: 12px;
+    margin: 2px 0;
+}
+
+/* Order */
+.order p {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    margin: 5px 0;
+}
+
+/* Button */
+button {
+    width: 100%;
+    padding: 7px;
+    background: #4fc3f7;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0288d1;
+}

@@ -1,0 +1,228 @@
+.checkout-page {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+    overflow-y: auto;
+}
+
+/* Container */
+.checkout-page .container {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+/* Title */
+.checkout-page h2 {
+    text-align: center;
+    color: #be77ea;
+    margin: 20px 0 30px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+/* Box */
+.checkout-page .box {
+    background: #fff;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Section titles */
+.checkout-page h3 {
+    margin: 25px 0 15px;
+    font-size: 18px;
+    color: #333;
+    font-weight: 600;
+}
+
+/* Inputs */
+.checkout-page input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.checkout-page input:focus {
+    outline: none;
+    border-color: #be77ea;
+    box-shadow: 0 0 5px rgba(190, 119, 234, 0.3);
+}
+
+/* Invalid input styling */
+.checkout-page input:invalid {
+    border-color: #dc3545;
+}
+
+/* Error Messages */
+.checkout-page .error-message {
+    color: #dc3545;
+    font-size: 14px;
+    margin: -10px 0 10px 0;
+    padding: 5px 0;
+    font-weight: 500;
+}
+
+/* Row */
+.checkout-page .row {
+    display: flex;
+    gap: 15px;
+    margin: 8px 0 15px;
+}
+
+.checkout-page .row input {
+    width: calc(50% - 7.5px);
+    margin: 0;
+}
+
+/* Payment options */
+.checkout-page .pay {
+    margin: 15px 0;
+}
+
+.checkout-page .pay label {
+    display: block;
+    font-size: 16px;
+    margin: 10px 0;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.checkout-page .pay label:hover {
+    background-color: #f8f9fa;
+}
+
+.checkout-page .pay input[type="radio"] {
+    margin-right: 10px;
+    transform: scale(1.2);
+}
+
+/* Order */
+.checkout-page .order p {
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 15px 0;
+    color: #333;
+}
+
+.checkout-page .order p span {
+    color: #be77ea;
+    font-size: 24px;
+}
+
+/* Button */
+.checkout-page button {
+    width: 100%;
+    padding: 15px;
+    background: #4fc3f7;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.checkout-page button:hover {
+    background: #0288d1;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .checkout-page {
+        padding: 10px;
+    }
+
+    .checkout-page .container {
+        margin: 10px auto;
+        padding: 15px;
+    }
+
+    .checkout-page h2 {
+        font-size: 24px;
+        margin: 15px 0 20px;
+    }
+
+    .checkout-page .box {
+        padding: 20px;
+    }
+
+    .checkout-page .row {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .checkout-page .row input {
+        width: 100%;
+    }
+}
+
+/* Order Success Message */
+.checkout-page .order-success-message {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-in;
+}
+
+.checkout-page .success-content {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    width: 90%;
+    animation: slideUp 0.4s ease-out;
+}
+
+.checkout-page .success-content h3 {
+    color: #28a745;
+    margin: 0 0 15px 0;
+    font-size: 24px;
+}
+
+.checkout-page .success-content p {
+    color: #666;
+    margin: 0;
+    font-size: 16px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

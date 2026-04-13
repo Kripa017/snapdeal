@@ -1,0 +1,65 @@
+.track-container {
+  text-align: center;
+  padding: 30px;
+  font-family: Arial, sans-serif;
+}
+
+.tracker {
+  display: flex;
+  flex-direction: column;   /* ✅ vertical */
+  align-items: flex-start;
+  gap: 20px;
+  margin: 40px auto;
+  max-width: 300px;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Circle */
+.circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: lightgray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+/* ✔ Completed steps */
+.step.completed .circle {
+  background-color: #4caf50;
+  color: white;
+}
+
+/* Active step (current step) */
+.step.active .circle {
+  border: 3px solid #e40046;
+  background-color: white;
+}
+
+/* Text */
+.step p {
+  margin: 0;
+  font-size: 16px;
+}
+
+/* Buttons */
+.buttons button {
+  margin: 5px;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  background-color: #e40046;
+  color: white;
+  border-radius: 5px;
+}
+
+.buttons button:hover {
+  background-color: #c7003a;
+}
