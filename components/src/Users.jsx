@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { getFullApiPath } from './api';
 
 function Users () {
     const [users, setUsers] = useState([])
         
       
      useEffect(() => {
-        axios.get(getFullApiPath('/'))
+        axios.get("http://localhost:3001")
         .then(result => setUsers(result.data))
         .catch(err => console.log(err))
      }, [])

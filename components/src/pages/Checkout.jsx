@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { getFullApiPath } from '../api';
 import './checkout.css';
 
 // Load Razorpay script
@@ -171,7 +170,7 @@ const Checkout = () => {
         }
 
         
-        const response = await fetch(getFullApiPath('/api/orders'), {
+        const response = await fetch('http://localhost:3001/api/orders', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
@@ -220,7 +219,7 @@ const Checkout = () => {
             console.log('Payment successful:', response);
             
             try {
-              const verifyResponse = await fetch(getFullApiPath('/api/verify-payment'), {
+              const verifyResponse = await fetch('http://localhost:3001/api/verify-payment', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -270,7 +269,7 @@ const Checkout = () => {
         rzp.open();
       } else {
         // COD payment
-        const response = await fetch(getFullApiPath('/api/orders'), {
+        const response = await fetch('http://localhost:3001/api/orders', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),

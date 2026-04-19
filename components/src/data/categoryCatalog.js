@@ -393,7 +393,7 @@ export function buildApiProductUrl(p) {
     return `/product?id=${encodeURIComponent(String(p._id))}`;
   }
   const imageUrl = p.image
-    ? getUploadFileUrl(p.image)
+    ? `http://localhost:3001/uploads/${p.image}`
     : '';
   const params = new URLSearchParams();
   params.set('name', p.product);
@@ -416,7 +416,7 @@ export function buildApiProductUrl(p) {
 /** Shape expected by Product page + cart (uploaded / API products) */
 export function apiProductToCartItem(p) {
   const imageUrl = p.image
-    ? getUploadFileUrl(p.image)
+    ? `http://localhost:3001/uploads/${p.image}`
     : '';
   const price = Number(p.price);
   const mrp = p.mrp != null ? Number(p.mrp) : price;

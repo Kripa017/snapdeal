@@ -15,10 +15,10 @@ app.use(express.json());
 
 
 
-
+// Serve uploaded images
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-
+// MongoDB Model for Images
 const ImageSchema = new mongoose.Schema({
   imageUrl: String,
   createdAt: { type: Date, default: Date.now }
@@ -26,7 +26,7 @@ const ImageSchema = new mongoose.Schema({
 
 const Image = mongoose.model("Image", ImageSchema);
 
-
+// Multer config for image uploads
 const storage = multer.diskStorage({
   destination: path.join(__dirname, "uploads"),
   filename: (req, file, cb) => {
@@ -36,11 +36,10 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-
+// Image upload API
 app.post("/upload", upload.single("image"), async (req, res) => {
   try {
-    const baseUrl = `${req.protocol}://${req.get('host')}`;
-    const imageUrl = `${baseUrl}/uploads/${req.file.filename}`;
+    const imageUrl = `http://localhost:3001/uploads/${req.file.filename}`;
 
     const newImage = new Image({ imageUrl });
     await newImage.save();
@@ -51,7 +50,7 @@ app.post("/upload", upload.single("image"), async (req, res) => {
   }
 });
 
-
+// Get all images
 app.get("/images", async (req, res) => {
   try {
     const images = await Image.find().sort({ createdAt: -1 });
@@ -61,7 +60,7 @@ app.get("/images", async (req, res) => {
   }
 });
 
-
+// Delete image
 app.delete("/images/:id", async (req, res) => {
   try {
     await Image.findByIdAndDelete(req.params.id);

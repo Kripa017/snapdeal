@@ -11,19 +11,18 @@ const router = express.Router();
 
 
 let transporter;
-if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
-  transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
-    },
-  });
-} else {
-  console.warn('EMAIL_USER / EMAIL_PASS not set; using Ethereal test account');
-  
-  (async () => {
-    try {
+const transporterInitPromise = (async () => {
+  try {
+    if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
+      transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_PASS,
+        },
+      });
+    } else {
+      console.warn('EMAIL_USER / EMAIL_PASS not set; using Ethereal test account');
       const testAccount = await nodemailer.createTestAccount();
       transporter = nodemailer.createTransport({
         host: 'smtp.ethereal.email',
@@ -34,26 +33,16 @@ if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
           pass: testAccount.pass,
         },
       });
-      transporter.verify((err, success) => {
-        if (err) console.error('Ethereal transporter verify failed:', err);
-        else console.log('Ethereal transporter is ready');
-      });
-    } catch (err) {
-      console.error('Failed to create Ethereal transporter:', err);
     }
-  })();
-}
 
-if (transporter) {
-  transporter.verify((err, success) => {
-    if (err) {
-      console.error('Gmail transporter verify failed:', err);
-    } else {
-      console.log('Gmail transporter is ready to send emails');
-    }
-  });
-}
-
+    await transporter.verify();
+    const transportName = process.env.EMAIL_USER ? 'Gmail' : 'Ethereal';
+    console.log(`${transportName} transporter is ready to send emails`);
+  } catch (err) {
+    console.error('Failed to initialize email transporter:', err);
+    transporter = null;
+  }
+})();
 
 const SEND_EMAIL = process.env.SEND_EMAIL === 'true';
 
@@ -170,14 +159,19 @@ router.post("/send-otp", async (req, res) => {
       otpExpiresAt
     });
 
+    await transporterInitPromise;
+    if (!transporter) {
+      throw new Error('Email transporter not available');
+    }
+
     const fromAddress = process.env.EMAIL_USER || 'test@example.com';
     const recipientEmail = email.trim().toLowerCase();
 
     const mailOptions = {
-      from: '"Snapdeal" <your_admin_email@gmail.com>',
+      from: `"Snapdeal" <${fromAddress}>`,
       to: recipientEmail,
       subject: 'Your OTP for Login',
-      text: `Your OTP is: ${otp}. It expires in 10 minutes.`
+      text: `Your OTP is: ${otp}. It expires in 10 minutes.`,
     };
     const info = await transporter.sendMail(mailOptions);
     console.log('OTP sent to:', mailOptions.to);
@@ -227,7 +221,7 @@ router.post("/verify-otp", async (req, res) => {
       otpExpiresAt: null
     });
 
-    const { password: _, otpHash: __, otpExpiresAt: ___, ...safe } = user.toObject();
+    const { password, otpHash, otpExpiresAt, ...safe } = user.toObject();
     const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: "1d" });
     return res.json({ success: true, user: safe, token });
   } catch (err) {
@@ -268,14 +262,19 @@ router.post("/resend-otp", async (req, res) => {
       otpExpiresAt
     });
 
+    await transporterInitPromise;
+    if (!transporter) {
+      throw new Error('Email transporter not available');
+    }
+
     const fromAddress = process.env.EMAIL_USER || 'test@example.com';
     const recipientEmail = email.trim().toLowerCase();
 
     const mailOptions = {
-      from: fromAddress,
+      from: `"Snapdeal" <${fromAddress}>`,
       to: recipientEmail,
       subject: 'Your OTP for Login (Resent)',
-      text: `Your new OTP is: ${otp}. It expires in 10 minutes.\n\nEmail: ${recipientEmail}`
+      text: `Your new OTP is: ${otp}. It expires in 10 minutes.\n\nEmail: ${recipientEmail}`,
     };
     const info = await transporter.sendMail(mailOptions);
     console.log('OTP resent to:', mailOptions.to);

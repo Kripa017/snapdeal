@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { API_URL } from "../api";
 import "./register.css";
+
+const API_URL = import.meta.env.VITE_API_URL || "";
 
 
 

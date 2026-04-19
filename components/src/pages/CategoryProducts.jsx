@@ -5,7 +5,6 @@ import './categoryProducts.css';
 import { NAV_CATEGORIES } from '../data/navCategories';
 import {
   buildApiProductUrl,
-  getUploadFileUrl,
 } from '../data/categoryCatalog';
 import { SEARCH_CATEGORY_MAP } from '../data/searchCategoryMap';
 
@@ -30,7 +29,7 @@ const CategoryProducts = () => {
       try {
         const q = encodeURIComponent(category.trim());
         const res = await fetch(
-          getFullApiPath(`/api/products?category=${q}`)
+          `http://localhost:3001/api/products?category=${q}`
         );
         const data = await res.json();
         if (!cancelled && Array.isArray(data)) {
@@ -136,8 +135,9 @@ const CategoryProducts = () => {
               {rows.map((row) => {
                 const p = row.data;
                 const href = buildApiProductUrl(p);
-                const imgSrc = getUploadFileUrl(p.image);
-                  
+                const imgSrc = p.image
+                  ? `http://localhost:3001/uploads/${p.image}`
+                  : '';
                 return (
                   <div key={row.key} className="product-card">
                     <Link to={href} style={{ textDecoration: 'none', color: 'inherit' }}>

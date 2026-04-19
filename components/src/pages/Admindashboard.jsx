@@ -17,11 +17,11 @@ const Admindashboard = () => {
       <div className="header">Admin Dashboard</div>
       <div className="container">
         <div className="dashboard-boxes">
-          
           <div className="box">
-            <h4>Upload Product Form</h4>
-            <button className="btn" onClick={() =>navigate('/uploadproductform')}>Upload Product Form</button>
+            <h4>Add Product</h4>
+            <button className="btn" onClick={goToAddProduct}>Add New</button>
           </div>
+          
 
            <div className="box">
             <h4>Manage Products</h4>
@@ -36,7 +36,10 @@ const Admindashboard = () => {
           
           
 
-
+<div className="box">
+            <h4>Upload Product Form</h4>
+            <button className="btn" onClick={() =>navigate('/uploadproductform')}>Upload Product Form</button>
+          </div>
 
 
           <div className="box">

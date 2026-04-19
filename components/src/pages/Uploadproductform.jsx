@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getFullApiPath } from '../api';
 import "./uploadproductform.css";
 import { NAV_CATEGORIES } from "../data/navCategories";
 
@@ -50,7 +49,7 @@ const Uploadproductform = () => {
     }
 
     try {
-      const response = await fetch(getFullApiPath('/api/products'), {
+      const response = await fetch("http://localhost:3001/api/products", {
         method: "POST",
         body: formData,
       });

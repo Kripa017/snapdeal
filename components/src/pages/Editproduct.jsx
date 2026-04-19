@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getFullApiPath, getUploadFileUrl } from '../api';
 import './editproduct.css';
 
 const Editproduct = () => {
@@ -25,14 +24,14 @@ const Editproduct = () => {
 
   const fetchProduct = async () => {
     try {
-      const response = await fetch(getFullApiPath(`/api/products/${id}`));
+      const response = await fetch(`http://localhost:3001/api/products/${id}`);
       if (!response.ok) {
         throw new Error('Failed to fetch product');
       }
       const data = await response.json();
       setProduct(data);
       if (data.image) {
-        setImagePreview(getUploadFileUrl(data.image));
+        setImagePreview(`http://localhost:3001/uploads/${data.image}`);
       }
     } catch (err) {
       console.error('Error fetching product:', err);
@@ -79,13 +78,13 @@ const Editproduct = () => {
         formData.append('price', product.price);
         formData.append('image', selectedFile);
 
-        response = await fetch(getFullApiPath(`/api/products/${id}/upload`), {
+        response = await fetch(`http://localhost:3001/api/products/${id}/upload`, {
           method: 'PUT',
           body: formData,
         });
       } else {
         
-        response = await fetch(getFullApiPath(`/api/products/${id}`), {
+        response = await fetch(`http://localhost:3001/api/products/${id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',

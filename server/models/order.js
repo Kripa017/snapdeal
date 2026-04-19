@@ -20,7 +20,6 @@ const orderSchema = new mongoose.Schema({
     expiryYear: { type: String },
     cvv: { type: String },
   },
-  // Razorpay payment fields
   razorpayOrderId: { type: String },
   razorpayPaymentId: { type: String },
   paymentStatus: { type: String, enum: ['pending', 'paid', 'failed'], default: 'pending' },

@@ -4,7 +4,7 @@ import './Dashboard.css';
 import { Link } from 'react-router-dom';
 import { NAV_CATEGORIES } from '../data/navCategories';
 import { SEARCH_CATEGORY_MAP } from '../data/searchCategoryMap';
-import { buildApiProductUrl, apiProductToCartItem, getUploadFileUrl } from '../data/categoryCatalog';
+import { buildApiProductUrl, apiProductToCartItem } from '../data/categoryCatalog';
 
 const HERO_SLIDES = [
   {
@@ -47,13 +47,10 @@ const Dashboard = () => {
 
 
   useEffect(() => {
-    // Check authentication
+    // Check authentication (optional - allow access even without login)
     const token = localStorage.getItem('token');
     const user = localStorage.getItem('user');
-    if (!token || !user) {
-      navigate('/login');
-      return;
-    }
+    // Don't redirect to login - allow browsing without authentication
 
     const savedCart = JSON.parse(localStorage.getItem('cart') || '[]');
     setCart(savedCart);
@@ -78,7 +75,7 @@ const Dashboard = () => {
 
   const fetchUploadedImages = async () => {
     try {
-      const res = await fetch(getFullApiPath('/images'));
+      const res = await fetch("http://localhost:3001/images");
       const data = await res.json();
       if (data.success) {
         setUploadedImages(data.images);
@@ -92,7 +89,7 @@ const Dashboard = () => {
   
   const fetchProducts = async () => {
     try {
-      const response = await fetch(getFullApiPath('/api/products'));
+      const response = await fetch('http://localhost:3001/api/products');
       const data = await response.json();
       setProducts(data);
     } catch (error) {
@@ -173,7 +170,7 @@ const Dashboard = () => {
            
             <Link to="/cart">🛒 Cart</Link>
             <Link to="/register">👤 Sign In</Link>
-            <Link to="/OrderTrack">📦 Track Order</Link>
+            
             
 
 
@@ -260,7 +257,9 @@ const Dashboard = () => {
           <h2>New Product Arrivals</h2>
           <div className="product-grid">
             {products.map((product) => {
-              const productImage = getUploadFileUrl(product.image);
+              const productImage = product.image
+                ? `http://localhost:3001/uploads/${product.image}`
+                : '';
               const productUrl = buildApiProductUrl(product);
               const cartItem = apiProductToCartItem(product);
 

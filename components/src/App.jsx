@@ -19,7 +19,7 @@ import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import Product from "./pages/Product";
 import Order from "./pages/Order";
-import OrderTrack from "./pages/OrderTrack"
+
 
 
 import Home from "./pages/Dashboard";
@@ -48,7 +48,7 @@ function App() {
       <Route path="/category" element={<CategoryProducts />} />
       <Route path="/product" element={<Product />} />
       <Route path="/order" element={<Order />} />
-      <Route path="/OrderTrack" element={<OrderTrack />} />
+      
       
       
 

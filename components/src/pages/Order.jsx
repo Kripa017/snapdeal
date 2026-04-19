@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { getFullApiPath } from '../api';
 import './order.css';
 
 const Order = () => {
@@ -14,7 +13,7 @@ const Order = () => {
     const fetchOrders = async () => {
       try {
         setLoading(true);
-        const res = await fetch(getFullApiPath('/api/orders'));
+        const res = await fetch('http://localhost:3001/api/orders');
         const data = await res.json();
         if (!res.ok || !data.success) {
           throw new Error(data.error || 'Could not load orders');
@@ -38,7 +37,7 @@ const Order = () => {
 
     try {
       setUpdatingOrderId(orderId);
-      const res = await fetch(getFullApiPath(`/api/orders/${orderId}/status`), {
+      const res = await fetch(`http://localhost:3001/api/orders/${orderId}/status`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: nextStatus }),

@@ -10,19 +10,18 @@ const ORDER_STATUSES = ['pending', 'order confirmed', 'shipped', 'delivered', 'p
 
 
 let transporter;
-if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
-  transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
-    },
-  });
-} else {
-  console.warn('EMAIL_USER / EMAIL_PASS not set; using Ethereal test account for orders');
-  
-  (async () => {
-    try {
+const transporterInitPromise = (async () => {
+  try {
+    if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
+      transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_PASS,
+        },
+      });
+    } else {
+      console.warn('EMAIL_USER / EMAIL_PASS not set; using Ethereal test account for orders');
       const testAccount = await nodemailer.createTestAccount();
       transporter = nodemailer.createTransport({
         host: 'smtp.ethereal.email',
@@ -33,29 +32,20 @@ if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
           pass: testAccount.pass,
         },
       });
-      transporter.verify((err, success) => {
-        if (err) console.error('Ethereal transporter verify failed:', err);
-        else console.log('Ethereal transporter is ready for orders');
-      });
-    } catch (err) {
-      console.error('Failed to create Ethereal transporter for orders:', err);
     }
-  })();
-}
 
-if (transporter) {
-  transporter.verify((err, success) => {
-    if (err) {
-      console.error('Gmail transporter verify failed for orders:', err);
-    } else {
-      console.log('Gmail transporter is ready to send order emails');
-    }
-  });
-}
+    await transporter.verify();
+    const transportName = process.env.EMAIL_USER ? 'Gmail' : 'Ethereal';
+    console.log(`${transportName} transporter is ready to send order emails`);
+  } catch (err) {
+    console.error('Failed to initialize email transporter for orders:', err);
+    transporter = null;
+  }
+})();
 
 router.post('/orders', async (req, res) => {
   try {
-    const { customer, paymentMethod, cardInfo, items, total } = req.body;
+    const { customer, paymentMethod, cardInfo, items, total } = req.body || {};
 
     if (!customer || !customer.firstName || !customer.lastName || !customer.address || !customer.city || !customer.state || !customer.zip || !customer.email || !customer.phone) {
       return res.status(400).json({ success: false, error: 'All customer fields are required' });
@@ -69,7 +59,7 @@ router.post('/orders', async (req, res) => {
       paymentMethod,
       items,
       total,
-      status: paymentMethod === 'cod' ? 'pending' : 'pending'
+      status: 'pending'
     };
 
     // For Razorpay gateway payments, create Razorpay order
@@ -141,28 +131,20 @@ router.put('/orders/:id/status', async (req, res) => {
     const notificationStatuses = ['order confirmed', 'shipped', 'delivered'];
     if (notificationStatuses.includes(status) && oldOrder.status !== status) {
       try {
+        await transporterInitPromise;
+        if (!transporter) {
+          throw new Error('Email transporter not available');
+        }
+
         const fromAddress = process.env.EMAIL_USER || 'test@example.com';
         const recipientEmail = order.customer.email;
+        const orderLines = order.items.map(item => `- ${item.name} (Qty: ${item.quantity}) - ₹${item.price * item.quantity}`).join('\n');
 
         const mailOptions = {
-          from: '"Snapdeal" <your_admin_email@gmail.com>',
+          from: `"Snapdeal" <${fromAddress}>`,
           to: recipientEmail,
           subject: `Order Status Update - ${status.toUpperCase()}`,
-          text: `Order Status Update:
-
-Order ID: ${order._id}
-Customer: ${order.customer.firstName} ${order.customer.lastName}
-Email: ${order.customer.email}
-Phone: ${order.customer.phone}
-
-Status Changed To: ${status.toUpperCase()}
-
-Order Details:
-${order.items.map(item => `- ${item.name} (Qty: ${item.quantity}) - ₹${item.price * item.quantity}`).join('\n')}
-
-Total: ₹${order.total}
-
-Date: ${new Date().toLocaleString()}`
+          text: `Order Status Update:\n\nOrder ID: ${order._id}\nCustomer: ${order.customer.firstName} ${order.customer.lastName}\nEmail: ${order.customer.email}\nPhone: ${order.customer.phone}\n\nStatus Changed To: ${status.toUpperCase()}\n\nOrder Details:\n${orderLines}\n\nTotal: ₹${order.total}\n\nDate: ${new Date().toLocaleString()}`
         };
 
         const info = await transporter.sendMail(mailOptions);
