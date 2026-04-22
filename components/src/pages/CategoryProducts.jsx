@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import './Dashboard.css';
+import './dashboard.css';
 import './categoryProducts.css';
 import { NAV_CATEGORIES } from '../data/navCategories';
 import {
   buildApiProductUrl,
 } from '../data/categoryCatalog';
 import { SEARCH_CATEGORY_MAP } from '../data/searchCategoryMap';
+import { getFullApiPath, getUploadFileUrl } from '../api';
 
 const CategoryProducts = () => {
   const navigate = useNavigate();
@@ -28,9 +29,7 @@ const CategoryProducts = () => {
       setLoading(true);
       try {
         const q = encodeURIComponent(category.trim());
-        const res = await fetch(
-          `http://localhost:3001/api/products?category=${q}`
-        );
+        const res = await fetch(getFullApiPath(`/api/products?category=${q}`));
         const data = await res.json();
         if (!cancelled && Array.isArray(data)) {
           setApiProducts(data);
@@ -135,9 +134,7 @@ const CategoryProducts = () => {
               {rows.map((row) => {
                 const p = row.data;
                 const href = buildApiProductUrl(p);
-                const imgSrc = p.image
-                  ? `http://localhost:3001/uploads/${p.image}`
-                  : '';
+                const imgSrc = getUploadFileUrl(p.image);
                 return (
                   <div key={row.key} className="product-card">
                     <Link to={href} style={{ textDecoration: 'none', color: 'inherit' }}>

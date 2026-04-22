@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Dashboard.css';
+import './dashboard.css';
 import { Link } from 'react-router-dom';
 import { NAV_CATEGORIES } from '../data/navCategories';
 import { SEARCH_CATEGORY_MAP } from '../data/searchCategoryMap';
 import { buildApiProductUrl, apiProductToCartItem } from '../data/categoryCatalog';
+import { getFullApiPath, getUploadFileUrl } from '../api';
 
 const HERO_SLIDES = [
   {
@@ -75,7 +76,7 @@ const Dashboard = () => {
 
   const fetchUploadedImages = async () => {
     try {
-      const res = await fetch("http://localhost:3001/images");
+      const res = await fetch(getFullApiPath("/images"));
       const data = await res.json();
       if (data.success) {
         setUploadedImages(data.images);
@@ -89,7 +90,7 @@ const Dashboard = () => {
   
   const fetchProducts = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/products');
+      const response = await fetch(getFullApiPath("/api/products"));
       const data = await response.json();
       setProducts(data);
     } catch (error) {
@@ -257,9 +258,7 @@ const Dashboard = () => {
           <h2>New Product Arrivals</h2>
           <div className="product-grid">
             {products.map((product) => {
-              const productImage = product.image
-                ? `http://localhost:3001/uploads/${product.image}`
-                : '';
+              const productImage = getUploadFileUrl(product.image);
               const productUrl = buildApiProductUrl(product);
               const cartItem = apiProductToCartItem(product);
 

@@ -1,3 +1,5 @@
+import { getUploadFileUrl } from '../api';
+
 /** Demo products per category — same URL shape as Dashboard product cards */
 export const STATIC_CATALOG_BY_CATEGORY = {
   Men: [
@@ -392,9 +394,7 @@ export function buildApiProductUrl(p) {
   if (p._id) {
     return `/product?id=${encodeURIComponent(String(p._id))}`;
   }
-  const imageUrl = p.image
-    ? `http://localhost:3001/uploads/${p.image}`
-    : '';
+  const imageUrl = getUploadFileUrl(p.image);
   const params = new URLSearchParams();
   params.set('name', p.product);
   params.set('price', String(p.price));
@@ -415,9 +415,7 @@ export function buildApiProductUrl(p) {
 
 /** Shape expected by Product page + cart (uploaded / API products) */
 export function apiProductToCartItem(p) {
-  const imageUrl = p.image
-    ? `http://localhost:3001/uploads/${p.image}`
-    : '';
+  const imageUrl = getUploadFileUrl(p.image);
   const price = Number(p.price);
   const mrp = p.mrp != null ? Number(p.mrp) : price;
   return {

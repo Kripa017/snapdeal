@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./product.css";
+import { getFullApiPath, getUploadFileUrl } from "../api";
 
 const Product = () => {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ const Product = () => {
       setLoading(true);
       setNotFound(false);
       let cancelled = false;
-      fetch(`http://localhost:3001/api/products/${id}`)
+      fetch(getFullApiPath(`/api/products/${id}`))
         .then((res) => {
           if (!res.ok) throw new Error("not found");
           return res.json();
@@ -43,9 +44,7 @@ const Product = () => {
             setProduct({});
             return;
           }
-          const imageUrl = data.image
-            ? `http://localhost:3001/uploads/${data.image}`
-            : "";
+          const imageUrl = getUploadFileUrl(data.image);
           setProduct({
             name: data.product,
             price: Number(data.price),

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './viewproduct.css';
+import { getFullApiPath, getUploadFileUrl } from '../api';
 
 const Viewproduct = () => {
   const [products, setProducts] = useState([]);
@@ -11,7 +12,7 @@ const Viewproduct = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/products');
+      const response = await fetch(getFullApiPath('/api/products'));
       const data = await response.json();
       setProducts(Array.isArray(data) ? data : []);
     } catch (error) {
@@ -51,7 +52,7 @@ const Viewproduct = () => {
                 <td>
                   {product.image ? (
                     <img 
-                      src={`http://localhost:3001/uploads/${product.image}`} 
+                      src={getUploadFileUrl(product.image)} 
                       alt={product.product} 
                       style={{ width: '50px', height: '50px', objectFit: 'cover' }}
                     />

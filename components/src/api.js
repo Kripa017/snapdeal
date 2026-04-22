@@ -1,4 +1,5 @@
-export const API_URL = "https://snapdeal-backend-fc9u.onrender.com";
+const RAW_API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
+export const API_URL = RAW_API_URL.replace(/\/+$/, "");
 
 export function getFullApiPath(path) {
   const normalized = path.startsWith('/') ? path : `/${path}`;

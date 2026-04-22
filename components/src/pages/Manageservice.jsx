@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './manageservice.css';
+import { getFullApiPath } from '../api';
 
 const Manageservice = () => {
     const [uploadedImages, setUploadedImages] = useState([]);
@@ -8,7 +9,7 @@ const Manageservice = () => {
     
     const fetchImages = async () => {
         try {
-            const res = await fetch("http://localhost:3001/images");
+            const res = await fetch(getFullApiPath("/images"));
             const data = await res.json();
 
             if (data.success) {
@@ -39,7 +40,7 @@ const Manageservice = () => {
         const formData = new FormData();
         formData.append("image", selectedFile);
 
-        const res = await fetch("http://localhost:3001/upload", {
+        const res = await fetch(getFullApiPath("/upload"), {
             method: "POST",
             body: formData
         });
@@ -65,7 +66,7 @@ const Manageservice = () => {
         if (!confirmDelete) return;
 
         try {
-            const res = await fetch(`http://localhost:3001/images/${id}`, {
+            const res = await fetch(getFullApiPath(`/images/${id}`), {
                 method: "DELETE"
             });
 

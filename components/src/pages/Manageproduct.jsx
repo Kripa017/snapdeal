@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './manageproduct.css';
+import { getFullApiPath, getUploadFileUrl } from '../api';
 
 const Manageproduct = () => {
   const [products, setProducts] = useState([]);
@@ -11,7 +12,7 @@ const Manageproduct = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/products');
+      const response = await fetch(getFullApiPath('/api/products'));
       const data = await response.json();
       setProducts(data);
     } catch (error) {
@@ -24,7 +25,7 @@ const Manageproduct = () => {
   const handleDelete = async (productId) => {
     if (window.confirm('Are you sure you want to delete this product?')) {
       try {
-        const response = await fetch(`http://localhost:3001/api/products/${productId}`, {
+        const response = await fetch(getFullApiPath(`/api/products/${productId}`), {
           method: 'DELETE'
         });
         if (response.ok) {
@@ -73,7 +74,7 @@ const Manageproduct = () => {
                 <td>
                   {product.image ? (
                     <img 
-                      src={`http://localhost:3001/uploads/${product.image}`} 
+                      src={getUploadFileUrl(product.image)} 
                       alt={product.product} 
                       style={{ width: '50px', height: '50px', objectFit: 'cover' }}
                     />

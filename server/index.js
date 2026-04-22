@@ -5,6 +5,7 @@ const cors = require("cors");
 const path = require('path');
 const multer = require("multer");
 
+
 const userRoutes = require("./user");
 const productRoutes = require("./products");
 const ordersRoutes = require("./orders");
@@ -39,7 +40,8 @@ const upload = multer({ storage });
 // Image upload API
 app.post("/upload", upload.single("image"), async (req, res) => {
   try {
-    const imageUrl = `http://localhost:3001/uploads/${req.file.filename}`;
+    const imageBaseUrl = process.env.IMAGE_BASE_URL || `${req.protocol}://${req.get("host")}`;
+    const imageUrl = `${imageBaseUrl}/uploads/${req.file.filename}`;
 
     const newImage = new Image({ imageUrl });
     await newImage.save();
@@ -72,11 +74,22 @@ app.delete("/images/:id", async (req, res) => {
 
 
 
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/snapdeal";
+const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_DB_NAME = process.env.MONGODB_DB_NAME || "snapdeal";
+if (!MONGODB_URI) {
+  console.error("MONGODB_URI is missing. Please set your MongoDB Atlas connection string.");
+  process.exit(1);
+}
+
 mongoose
-  .connect(MONGODB_URI)
-  .then(() => console.log("MongoDB connected"))
-  .catch((err) => console.error("MongoDB connection error:", err));
+  .connect(MONGODB_URI, { dbName: MONGODB_DB_NAME })
+  .then(() => {
+    console.log(`MongoDB Atlas connected (db: ${mongoose.connection.name})`);
+  })
+  .catch((err) => {
+    console.error("MongoDB connection error:", err);
+    process.exit(1);
+  });
 
 
 app.use("/api", userRoutes);

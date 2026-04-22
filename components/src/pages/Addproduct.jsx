@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./addproduct.css";
 import { NAV_CATEGORIES } from "../data/navCategories";
+import { getFullApiPath } from "../api";
 
 const Addproduct = () => {
   const [product, setProduct] = useState("");
@@ -26,7 +27,7 @@ const Addproduct = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:3001/api/products', {
+      const response = await fetch(getFullApiPath('/api/products'), {
         method: 'POST',
         body: formData,
       });
