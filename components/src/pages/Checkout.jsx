@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import './checkout.css';
-import { getFullApiPath } from "../api";
 
 // Load Razorpay script
 const loadRazorpayScript = () => {
@@ -56,10 +55,13 @@ const Checkout = () => {
   const params = new URLSearchParams(location.search);
   const buyNowTotal = params.get('total');
 
-  const total = buyNowTotal ? parseFloat(buyNowTotal) : cart.reduce(
+  const subtotal = buyNowTotal ? parseFloat(buyNowTotal) : cart.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
   );
+  const gstRate = 0.18; // 18% GST
+  const gstAmount = parseFloat((subtotal * gstRate).toFixed(2));
+  const total = parseFloat((subtotal + gstAmount).toFixed(2));
 
   const validateForm = () => {
     const newErrors = {};
@@ -171,7 +173,7 @@ const Checkout = () => {
         }
 
         
-        const response = await fetch(getFullApiPath('/api/orders'), {
+        const response = await fetch('http://localhost:3001/api/orders', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
@@ -220,7 +222,7 @@ const Checkout = () => {
             console.log('Payment successful:', response);
             
             try {
-              const verifyResponse = await fetch(getFullApiPath('/api/verify-payment'), {
+              const verifyResponse = await fetch('http://localhost:3001/api/verify-payment', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -270,7 +272,7 @@ const Checkout = () => {
         rzp.open();
       } else {
         // COD payment
-        const response = await fetch(getFullApiPath('/api/orders'), {
+        const response = await fetch('http://localhost:3001/api/orders', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
@@ -446,7 +448,13 @@ const Checkout = () => {
 
         <div className="order">
           <p>
-            Total <span>₹{total}</span>
+            Subtotal <span>₹{subtotal.toFixed(2)}</span>
+          </p>
+          <p>
+            GST ({gstRate * 100}%) <span>₹{gstAmount.toFixed(2)}</span>
+          </p>
+          <p className="order-total">
+            Total <span>₹{total.toFixed(2)}</span>
           </p>
           <button onClick={handlePlaceOrder}>Place Order</button>
         </div>
