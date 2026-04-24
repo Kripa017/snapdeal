@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './manageusers.css';
+import { getFullApiPath } from '../api';
 
 function Manageusers() {
   const [users, setUsers] = useState([]);
@@ -12,7 +13,7 @@ function Manageusers() {
       : {};
 
     
-    fetch('/api/users', { headers })
+    fetch(getFullApiPath('/api/users'), { headers })
       .then(res => res.json())
       .then(data => {
         if (data.success) {

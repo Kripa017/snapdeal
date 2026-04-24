@@ -1,11 +1,18 @@
-const RAW_API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
-export const API_URL = RAW_API_URL.replace(/\/+$/, "");
+const RAW_API_URL = import.meta.env.VITE_API_URL || "";
+export const API_URL = RAW_API_URL.trim().replace(/\/+$/, "");
 
 export function getFullApiPath(path) {
   const normalized = path.startsWith('/') ? path : `/${path}`;
-  return `${API_URL}${normalized}`;
+  return API_URL ? `${API_URL}${normalized}` : normalized;
 }
 
 export function getUploadFileUrl(fileName) {
-  return fileName ? `${API_URL}/uploads/${fileName}` : '';
+  if (!fileName) return '';
+  if (fileName.startsWith("http://") || fileName.startsWith("https://")) return fileName;
+
+  const normalizedPath = fileName.startsWith("/uploads/")
+    ? fileName
+    : `/uploads/${fileName.replace(/^\/+/, "")}`;
+
+  return API_URL ? `${API_URL}${normalizedPath}` : normalizedPath;
 }

@@ -2,8 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./login.css";
-
-const API_URL = import.meta.env.VITE_API_URL || "";
+import { getFullApiPath } from "../api";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -23,7 +22,7 @@ function Login() {
     setLoading(true);
 
     try {
-      const res = await axios.post(`${API_URL}/api/send-otp`, {
+      const res = await axios.post(getFullApiPath("/api/send-otp"), {
         email: email.trim(),
       });
 
@@ -51,7 +50,7 @@ function Login() {
 
     try {
       console.log("Verifying OTP for email:", email.trim(), "OTP:", otp.trim());
-      const res = await axios.post(`${API_URL}/api/verify-otp`, {
+      const res = await axios.post(getFullApiPath("/api/verify-otp"), {
         email: email.trim(),
         otp: otp.trim(),
       });
@@ -79,7 +78,7 @@ function Login() {
     setLoading(true);
 
     try {
-      const res = await axios.post(`${API_URL}/api/resend-otp`, {
+      const res = await axios.post(getFullApiPath("/api/resend-otp"), {
         email: email.trim(),
       });
 

@@ -2,8 +2,7 @@ import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import "./otpmodal.css";
-
-const API_URL = import.meta.env.VITE_API_URL || "";
+import { getFullApiPath } from "../api";
 
 function OTPModal({ email, onClose }) {
   const [otp, setOtp] = useState("");
@@ -37,7 +36,7 @@ function OTPModal({ email, onClose }) {
     setError("");
 
     try {
-      const res = await axios.post(`${API_URL}/api/verify-otp`, {
+      const res = await axios.post(getFullApiPath("/api/verify-otp"), {
         email: otpEmail,
         otp: normalizedOtp,
       });
@@ -67,7 +66,7 @@ function OTPModal({ email, onClose }) {
     }
 
     try {
-      await axios.post(`${API_URL}/api/resend-otp`, { email: otpEmail });
+      await axios.post(getFullApiPath("/api/resend-otp"), { email: otpEmail });
       alert("OTP Resent");
     } catch {
       alert("Failed to resend OTP");

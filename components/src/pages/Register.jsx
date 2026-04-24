@@ -2,8 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./register.css";
-
-const API_URL = import.meta.env.VITE_API_URL || "";
+import { getFullApiPath } from "../api";
 
 
 
@@ -31,7 +30,7 @@ function Register() {
     setLoading(true);
 
     try {
-      const res = await axios.post(`${API_URL}/api/signup`, {
+      const res = await axios.post(getFullApiPath("/api/signup"), {
         name: name.trim(),
         email: email.trim().toLowerCase(),
         phone: phone.trim(),
