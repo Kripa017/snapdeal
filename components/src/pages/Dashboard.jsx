@@ -258,14 +258,14 @@ const Dashboard = () => {
           <h2>New Product Arrivals</h2>
           <div className="product-grid">
             {products.map((product) => {
-              const productImage = getUploadFileUrl(product.image);
+              const productImage = getUploadFileUrl(product.imageUrl || product.image);
               const productUrl = buildApiProductUrl(product);
               const cartItem = apiProductToCartItem(product);
 
               return (
                 <div key={product._id} className="product-card product-card--arrival">
                   <Link to={productUrl} className="product-card__media">
-                    {product.image ? (
+                    {(product.imageUrl || product.image) ? (
                       <img
                         src={productImage}
                         alt={product.product}
