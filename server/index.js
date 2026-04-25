@@ -40,8 +40,7 @@ const upload = multer({ storage });
 // Image upload API
 app.post("/upload", upload.single("image"), async (req, res) => {
   try {
-    const imageBaseUrl = process.env.IMAGE_BASE_URL || `${req.protocol}://${req.get("host")}`;
-    const imageUrl = `${imageBaseUrl}/uploads/${req.file.filename}`;
+    const imageUrl = `/uploads/${req.file.filename}`;
 
     const newImage = new Image({ imageUrl });
     await newImage.save();

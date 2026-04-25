@@ -8,7 +8,15 @@ export function getFullApiPath(path) {
 
 export function getUploadFileUrl(fileName) {
   if (!fileName) return '';
-  if (fileName.startsWith("http://") || fileName.startsWith("https://")) return fileName;
+
+  if (fileName.startsWith("http://") || fileName.startsWith("https://")) {
+    const uploadsPathMatch = fileName.match(/\/uploads\/[^?#]+/);
+    if (uploadsPathMatch) {
+      const normalizedPath = uploadsPathMatch[0];
+      return API_URL ? `${API_URL}${normalizedPath}` : normalizedPath;
+    }
+    return fileName;
+  }
 
   const normalizedPath = fileName.startsWith("/uploads/")
     ? fileName

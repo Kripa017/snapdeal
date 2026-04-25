@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './manageservice.css';
-import { getFullApiPath } from '../api';
+import { getFullApiPath, getUploadFileUrl } from '../api';
 
 const Manageservice = () => {
     const [uploadedImages, setUploadedImages] = useState([]);
@@ -109,7 +109,7 @@ const Manageservice = () => {
             <div className="image-list">
                 {uploadedImages.map((img) => (
                     <div key={img._id} className="image-item">
-                        <img src={img.imageUrl} alt="uploaded" width="150" />
+                        <img src={getUploadFileUrl(img.imageUrl)} alt="uploaded" width="150" />
 
                         <p>{new Date(img.createdAt).toLocaleString()}</p>
 

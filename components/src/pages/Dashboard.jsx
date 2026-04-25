@@ -309,7 +309,7 @@ const Dashboard = () => {
             {uploadedImages.map((img) => (
               <div key={img._id} className="product-card">
                 <div className="uploaded-image-wrapper">
-                  <img src={img.imageUrl} alt="Uploaded" />
+                  <img src={getUploadFileUrl(img.imageUrl)} alt="Uploaded" />
                 </div>
                 <h3>NewProduct Arrivals </h3>
                 <p className="upload-date">📅 {new Date(img.createdAt).toLocaleDateString()}</p>
