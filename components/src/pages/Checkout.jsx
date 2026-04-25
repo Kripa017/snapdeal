@@ -388,15 +388,7 @@ const Checkout = () => {
             Cash on Delivery
           </label>
 
-          <label>
-            <input
-              type="radio"
-              name="payment"
-              checked={formData.paymentMethod === 'card'}
-              onChange={() => handlePaymentChange('card')}
-            />
-            Card
-          </label>
+          
 
           <label>
             <input
